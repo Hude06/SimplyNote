@@ -9,6 +9,8 @@ let ExportButton = document.getElementById("export")
 FontSize.value = 16;
 let IDOn = 0;
 let allPages = []
+console.log(localStorage.getItem("allpages"))
+console.log(localStorage.getItem("AllPagess"))
 let pageOn = ""
 function exportTextAsFile(text, fileName) {
   // Create a Blob with the text content
@@ -35,6 +37,28 @@ class Page {
     this.text = text  
   }
 }
+if (localStorage.getItem("allpages") != null) {
+  let retString = localStorage.getItem("allpages")
+  let retArray = JSON.parse(retString)
+  allPages = retArray
+  console.log(allPages)
+  for (let i = 0; i < allPages.length; i++) {
+    AddNewButton(i,allPages)
+  }
+  CheckPage();
+
+}
+function AddNewButton(name,array) {
+  var newButton = document.createElement("Button");
+  newButton.textContent = name;
+  newButton.classList.add('page');
+  console.log("Array",array[name].id)
+  newButton.id = array[name].id;
+  console.log("new",newButton.id)
+
+  console.log(newButton)
+  pageList.appendChild(newButton);
+}
 function addNewPage(name) {
     var newButton = document.createElement("Button");
     newButton.textContent = name;
@@ -43,6 +67,10 @@ function addNewPage(name) {
     newButton.id = allPages.length;
     allPages.push(new Page(name,"This is some temp text"))
     CheckPage();
+    console.log("Adding A New Page")
+    console.log("Ssaving All Paghes",allPages)
+    let string = JSON.stringify(allPages)
+    localStorage.setItem("allpages", string)
 }   
 function keyboardInit() {
     window.addEventListener("keydown", function (event) {
@@ -78,11 +106,11 @@ function ButtonInits() {
     addPage.addEventListener("click", function () {
         addNewPage(allPages.length)
     });
-
-      CheckPage();
 }
 function CheckPage() {
+  console.log(allPages)
   for (let i = 0; i < allPages.length; i++) {
+    console.log("Fox",allPages[i].id)
     document.getElementById(allPages[i].id).addEventListener("click", function () {
       let saved = allPages[i]
       textBox.innerHTML = allPages[i].text
@@ -97,6 +125,8 @@ function loop() {
   if (typing) {
     pageOn.text = textBox.innerHTML 
     pageOn.title = title.innerHTML
+    let string = JSON.stringify(allPages)
+    localStorage.setItem("allpages", string)
   }
     requestAnimationFrame(loop)
 }
