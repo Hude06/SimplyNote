@@ -1,3 +1,44 @@
+body {
+  overflow: hidden;
+  outline: none;
+
+}
+h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+h2 {
+  font-size: 20px;
+  color: #555;
+}
+
+em {
+  font-style: italic;
+  color: #0066cc; /* Dark blue for emphasis */
+}
+
+strong {
+  font-weight: bold;
+  color: #cc0000; /* Dark red for strong */
+}
+
+ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+code {
+  font-family: 'Courier New', monospace;
+  background-color: #f4f4f4;
+  padding: 2px 5px;
+  border-radius: 3px;
+  color: #333;
+}
 :root {
   font-size: 16px;
   line-height: 24px;
@@ -11,8 +52,13 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-}
+  outline: none;
 
+}
+#title {
+  outline: none;
+
+}
 .container {
   margin: 0;
   padding-top: 10vh;
@@ -82,10 +128,6 @@ button {
   outline: none;
 }
 
-#greet-input {
-  margin-right: 5px;
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     color: #f6f6f6;
@@ -104,4 +146,103 @@ button {
   button:active {
     background-color: #0f0f0f69;
   }
+}
+
+#page-list button {
+  width: 300px;
+  background-color: transparent;
+  box-shadow: none;
+  position: relative;
+  margin-left: -60px;
+
+}
+
+body {
+font-family: 'Arial', sans-serif;
+margin: 0;
+padding: 0;
+background-color: #f4f4f4;
+color: #333;
+}
+
+.app-container {
+display: flex;
+min-height: 100vh;
+}
+
+.sidebar {
+width: 300px;
+background-color: #333;
+color: #fff;
+padding: 20px;
+}
+
+.sidebar h2 {
+font-size: 24px;
+margin-bottom: 20px;
+}
+
+.main-content {
+flex: 1;
+padding: 20px;
+}
+
+.title {
+font-size: 32px;
+margin-bottom: 20px;
+}
+
+#textBox {
+color: #333;
+font-family: 'Times New Roman', Times, serif;
+}
+
+#textBox {
+  width: 100%;
+  height: 100%;
+  border: 0px solid #f6f6f6;
+  background-color: #f6f6f6;
+  box-shadow: none;
+  overflow: hidden;
+  user-select: none;
+  outline: none;
+}
+#add-page {
+  margin-left: 290px;
+  background-size: 55%; /* This property sets the size of the background image */
+  height: 30px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  box-shadow: none;
+  background-image: url('./assets/File.png');
+  border: none;
+}
+#add-folder {
+  position: absolute;
+  z-index: 10;
+  top: 20px;
+  left: 275px;
+  background-size: 60%; /* This property sets the size of the background image */
+  height: 30px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  box-shadow: none;
+  background-image: url('./assets/Folder.png');
+  overflow: hidden;
+  user-select: none;
+  outline: none;
+  border: none;
+
+}
+#folder-list button {
+  text-align: center;
+  display: flex;
+  width: 300px;
+  background-color: transparent;
+  box-shadow: none;
+  position: relative;
+  margin-left: -60px;
+}
+#folder-list {
+  text-align: center;
 }

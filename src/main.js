@@ -1,74 +1,95 @@
+const { ask } = window.__TAURI__.dialog;
 let typing = false;
 let currentKey = new Map();
 let addPage = document.getElementById("add-page")
 let textBox = document.getElementById("textBox")
 let pageList = document.getElementById("page-list")
+let folderList = document.getElementById("folder-list");
+let addFolderButton = document.getElementById("add-folder")
+let folders = [];
 let title = document.getElementById("title")
-let FontSize = document.getElementById("FontSize")
-let ExportButton = document.getElementById("export")
-FontSize.value = 16;
 let IDOn = 0;
 let allPages = []
-console.log(localStorage.getItem("allpages"))
-console.log(localStorage.getItem("AllPagess"))
 let pageOn = ""
-function exportTextAsFile(text, fileName) {
-  // Create a Blob with the text content
-  const blob = new Blob([text], { type: 'text/plain' });
-
-  // Create a temporary URL for the Blob
-  const url = URL.createObjectURL(blob);
-
-  // Create an invisible anchor element
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = fileName;
-
-  // Trigger a click event on the anchor to initiate the download
-  a.click();
-
-  // Clean up by revoking the URL
-  URL.revokeObjectURL(url);
-}
+let folderOn = "Base"
 class Page {
-  constructor(title,text) {
+  constructor(title,text,folder) {
     this.id = title;
     this.title = title
-    this.text = text  
+    this.text = text 
+    this.fontSize = 10
+    this.font = "" 
+    if (folder) {
+      this.folderIN = folder
+    } else {
+      folder = "Base" 
+    }
   }
+}
+class Folder {
+  constructor(name,id) {
+      this.id = id
+      this.name = name;
+      this.pages = [];
+  }
+}
+if (localStorage.getItem("allfolders") != null) {
+  let retString = localStorage.getItem("allfolders")
+  let retArray = JSON.parse(retString)
+  folders = retArray
+  for (let i = 0; i < folders.length; i++) {
+    addNewFolderButton(i)
+  }
+  checkFolder();
 }
 if (localStorage.getItem("allpages") != null) {
   let retString = localStorage.getItem("allpages")
   let retArray = JSON.parse(retString)
   allPages = retArray
-  console.log(allPages)
+  let saved = allPages[0]
+  textBox.innerHTML = (allPages[0].text)
+  title.innerHTML = allPages[0].title
+  pageOn = saved
   for (let i = 0; i < allPages.length; i++) {
     AddNewButton(i,allPages)
   }
+  for (let i = 0; i < allPages.length; i++) {
+    document.getElementById(allPages[i].id).innerHTML = allPages[i].title
+  }
   CheckPage();
-
 }
 function AddNewButton(name,array) {
   var newButton = document.createElement("Button");
   newButton.textContent = name;
-  newButton.classList.add('page');
-  console.log("Array",array[name].id)
+  newButton.classList.add('page'+folderOn);
   newButton.id = array[name].id;
-  console.log("new",newButton.id)
-
-  console.log(newButton)
   pageList.appendChild(newButton);
+}
+function addNewFolderButton(name) {
+  var newFolder = document.createElement("Button");
+  newFolder.textContent = name;
+  newFolder.classList.add('folder');
+  newFolder.id = folders[name].id
+  folderList.appendChild(newFolder);
+}
+function addNewFolder(name) {
+  var newFolder = document.createElement("Button");
+  newFolder.textContent = name;
+  newFolder.classList.add('folder');
+  newFolder.id = "Folder" + folders.length
+  folderList.appendChild(newFolder);
+  folders.push(new Folder(name,"Folder" + folders.length));
+  checkFolder();
+  let string = JSON.stringify(folders)
+  localStorage.setItem("allfolders", string)
 }
 function addNewPage(name) {
     var newButton = document.createElement("Button");
     newButton.textContent = name;
-    newButton.classList.add('page'); // 'my-class' is the class name
+    newButton.classList.add('page'+folderOn); // 'my-class' is the class name
     pageList.appendChild(newButton);
     newButton.id = allPages.length;
-    allPages.push(new Page(name,"This is some temp text"))
     CheckPage();
-    console.log("Adding A New Page")
-    console.log("Ssaving All Paghes",allPages)
     let string = JSON.stringify(allPages)
     localStorage.setItem("allpages", string)
 }   
@@ -83,53 +104,60 @@ function keyboardInit() {
     });
 }
 function ButtonInits() {
-  ExportButton.addEventListener("click", function () {
-    console.log("click")
-    exportTextAsFile(textBox.innerHTML,"ExportedText.txt")
-  });
-  document.getElementById("myForm").addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent the form from submitting in the default way
-    var dropdown = document.getElementById("myDropdown");
-    var selectedValue = dropdown.options[dropdown.selectedIndex].value;
-    if (selectedValue === "Ariel") {
-      textBox.style.fontFamily = "Arial, Helvetica, sans-serif";
-    }
-    if (selectedValue === "ComicSans") {
-      textBox.style.fontFamily = 'Gill Sans', 'Gill Sans MT','Trebuchet MS';
-
-    }
-    if (selectedValue === "TimesNewRoman") {
-      textBox.style.fontFamily =  'Times New Roman';
-
-    }
-  });
     addPage.addEventListener("click", function () {
         addNewPage(allPages.length)
     });
+    addFolderButton.addEventListener("click", function () {
+      addNewFolder("NewFolder"+folders.length)
+    })
 }
 function CheckPage() {
-  console.log(allPages)
   for (let i = 0; i < allPages.length; i++) {
-    console.log("Fox",allPages[i].id)
     document.getElementById(allPages[i].id).addEventListener("click", function () {
       let saved = allPages[i]
-      textBox.innerHTML = allPages[i].text
+      textBox.innerHTML = (allPages[i].text)
       title.innerHTML = allPages[i].title
       pageOn = saved
     });
   }
 }
+function checkFolder() {
+  console.log("Checking FOlders")
+  for (let i = 0; i < folders.length; i++) {
+    if (i != null) {
+      document.getElementById("Folder" + i).addEventListener("click",function() {
+        folderOn = i
+        if (folderOn != "Base") {
+          let pages2 = document.getElementsByClassName("page" + "Base")
+          for (let  p = 0; p < pages2.length; p++) {
+            console.log(pages2[p])
+            pages2[p].style.visibility = "hidden"
+          }
+        }
+        if (folderOn === 0) {
+          console.log("00000")
+          let pages2 = document.getElementsByClassName("page" + "Base")
+          for (let  p = 0; p < pages2.length; p++) {
+            console.log(pages2[p])
+            pages2[p].style.visibility = "visible"
+          }
+       }
+      })
+    }
+  }
+}
 function loop() {
-  console.log(FontSize.value)
-  textBox.style.fontSize = FontSize.value + "px";
   if (typing) {
     pageOn.text = textBox.innerHTML 
     pageOn.title = title.innerHTML
+    document.getElementById(pageOn.id).innerHTML = pageOn.title
     let string = JSON.stringify(allPages)
     localStorage.setItem("allpages", string)
   }
     requestAnimationFrame(loop)
 }
+console.log("RANNNNNNN")
+
 ButtonInits();
 keyboardInit();
 loop();

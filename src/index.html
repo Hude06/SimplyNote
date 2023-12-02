@@ -1,28 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ideal Notes</title>
+    <title>SimplyNote</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+
 </head>
 <body>
     <div class="app-container">
         <div class="sidebar">
-            <h2>Ideal Notes</h2>
+            <button id="add-page"></button>
+            <div id="folders-container">
+                <button id="add-folder"></button>
+                <ul id="folder-list">
+
+                </ul>
+            </div>
             <ul id="page-list">
                 <!-- Pages will be listed here -->
-            </ul>
-            <button id="add-page">Add Page</button>
-            FontSize: <input type="number" id="FontSize">
-            <button id = "export">Export As Text File</button>
-            <form id="myForm">
-                <select id="myDropdown">
-                    <option value="Ariel">Ariel</option>
-                    <option value="ComicSans">Comic Sans</option>
-                    <option value="TimesNewRoman">TimesNewRoman</option>
-                </select>
-                <br>
-            </form>
-        </div>
+            </ul>  
+            </div>
         <div class="main-content">
             <div class="title"contenteditable="true" id = "title">Title of Your Page</div>
             <div id = "textBox" class="note" contenteditable="true">
@@ -32,85 +28,6 @@
     </div>
     <script type = "module"src="main.js"></script>
     <style>
-
-      #page-list {
-        position: c;
-        padding: 0;
-    }
-    #page-list button {
-        width: 300px;
-    }
-
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-.app-container {
-    display: flex;
-    min-height: 100vh;
-}
-
-.sidebar {
-    width: 300px;
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-}
-
-.sidebar h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.sidebar #page-list {
-    padding: 0;
-}
-
-.sidebar #page-list li {
-    margin: 5px 0;
-}
-
-.sidebar button#add-page {
-    background-color: #9d9d9d;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-}
-
-.sidebar button#add-page:hover {
-    background-color: #555;
-}
-
-.main-content {
-    flex: 1;
-    padding: 20px;
-}
-
-.title {
-    font-size: 32px;
-    margin-bottom: 20px;
-}
-
-.note {
-    background-color: #fff;
-    padding: 20px;
-    min-height: 70vh;
-    font-size: 18px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#textBox {
-    color: #333;
-    font-family: 'Times New Roman', Times, serif;
-}
-
     </style>
 </body>
 </html>

@@ -1,5 +1,5 @@
 {
-  "name": "InfiniteScribe",
+  "name": "SimplyNote",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,6 +7,11 @@
     "tauri": "tauri"
   },
   "devDependencies": {
+    "@tauri-apps/api": "^1.5.1",
     "@tauri-apps/cli": "^1.5.0"
+  },
+  "dependencies": {
+    "milligram": "^1.4.1",
+    "remarkable": "^2.0.1"
   }
 }
