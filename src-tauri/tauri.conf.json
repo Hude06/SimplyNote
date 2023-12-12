@@ -1,9 +1,10 @@
 {
+  
   "build": {
     "beforeDevCommand": "",
     "beforeBuildCommand": "",
     "devPath": "../src",
-    "distDir": "../src",
+    "distDir": "../dist",
     "withGlobalTauri": true
   },
   "package": {
@@ -13,6 +14,7 @@
   "tauri": {
     "allowlist": {
       "all": true,
+      
       "shell": {
         "all": false,
         "open": true
@@ -27,7 +29,8 @@
         "removeDir": true,
         "removeFile": true,
         "renameFile": true,
-        "exists": true
+        "exists": true,
+        "scope": ["**"]
       },
       "dialog": {
         "all": true,
