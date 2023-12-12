@@ -1,4 +1,3 @@
-const { ask } = window.__TAURI__.dialog;
 let typing = false;
 let currentKey = new Map();
 let addPage = document.getElementById("add-page")
@@ -8,6 +7,38 @@ let title = document.getElementById("title")
 let IDOn = 0;
 let allPages = []
 let pageOn = ""
+function fetchPages(userId) {
+  fetch(`http://localhost:5500/pages/${userId}`)
+  .then(response => response.json())
+  .then(pages => {
+    console.log('Pages for user:', pages);
+  })
+  
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+
+}
+
+function postData(userId,userData,pageSending) {
+  console.log(pageSending)
+  fetch('http://localhost:5500/save', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ userId, userData, pageSending }),
+  })
+  .then(response => response.text())
+  .then(data => {
+    console.log(data);
+    // You can handle the server response here
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
 class Page {
   constructor(title,text) {
     this.id = title;
@@ -15,11 +46,12 @@ class Page {
     this.text = text 
   }
 }
+console.log(fetchPages("Jude"))
 if (localStorage.getItem("allpages") != null) {
+  
   let retString = localStorage.getItem("allpages")
   let retArray = JSON.parse(retString)
   allPages = retArray
-  console.log(allPages)
   let saved = allPages[0]
   textBox.innerHTML = (allPages[0].text)
   title.innerHTML = allPages[0].title
@@ -79,7 +111,9 @@ function loop() {
     pageOn.title = title.innerHTML
     document.getElementById(pageOn.id).innerHTML = pageOn.title
     let string = JSON.stringify(allPages)
+    let string2 = JSON.stringify(allPages[pageOn.id])
     localStorage.setItem("allpages", string)
+    postData("Jude",string2,pageOn.id)
   }
     requestAnimationFrame(loop)
 }

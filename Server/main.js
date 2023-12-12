@@ -1,6 +1,7 @@
 // server.mjs
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors'; // Import the cors middleware
 import fs from 'fs';
 import path from 'path';
 
@@ -8,7 +9,10 @@ const __filename = new URL(import.meta.url).pathname;
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const port = 3000;
+const port = 5500;
+
+// Allow requests from http://127.0.0.1:1430 (or your specific client-side origin)
+app.use(cors({ origin: 'http://127.0.0.1:1430' }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,11 +24,13 @@ app.get('/', (req, res) => {
 app.post('/save', (req, res) => {
   const userId = req.body.userId;
   const userData = req.body.userData;
+  const page = req.body.pageSending;
+
 
   if (!userId || !userData) {
     return res.status(400).send('User ID and data are required');
   }
-
+  console.log(req.body)
   const userDir = path.join(__dirname, 'users', userId);
 
   // Create a directory for each user if it doesn't exist
@@ -33,8 +39,7 @@ app.post('/save', (req, res) => {
   }
 
   // Generate a unique filename based on timestamp
-  const timestamp = new Date().toISOString().replace(/:/g, '-');
-  const filename = `data_${timestamp}.txt`;
+  const filename = page+".txt";
 
   const filePath = path.join(userDir, filename);
 
@@ -47,6 +52,27 @@ app.post('/save', (req, res) => {
     console.log('Data saved successfully!');
     res.send('Data saved successfully!');
   });
+});
+// Request all pages for a user endpoint
+app.get('/pages/:userId', (req, res) => {
+  const userId = req.params.userId;
+  const userDir = path.join(__dirname, 'users', userId);
+
+  if (!fs.existsSync(userDir)) {
+    return res.status(404).send('User not found');
+  }
+
+  const pages = [];
+
+  fs.readdirSync(userDir).forEach(file => {
+    const filePath = path.join(userDir, file);
+    const content = fs.readFileSync(filePath, 'utf-8');
+    pages.push({ filename: file, content });
+  });
+
+  // Send the list of pages with content as a response
+  console.log(pages)
+  res.json({ pages });
 });
 
 app.listen(port, () => {
