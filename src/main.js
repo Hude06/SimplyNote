@@ -4,9 +4,17 @@ let addPage = document.getElementById("add-page")
 let textBox = document.getElementById("textBox")
 let pageList = document.getElementById("page-list")
 let title = document.getElementById("title")
+let loginButt = document.getElementById("loginButt")
+let loginPage = document.getElementById("login")
+let notePage = document.getElementById("app-container")
 let IDOn = 0;
 let allPages = []
 let pageOn = ""
+function login() {
+  console.log("Logging in")
+  loginPage.style.visibility = "vissible"
+  notePage.style.visibility = "hidden"
+}
 function fetchPages(userId) {
   fetch(`http://localhost:5500/pages/${userId}`)
   .then(response => response.json())
@@ -48,7 +56,6 @@ class Page {
 }
 console.log(fetchPages("Jude"))
 if (localStorage.getItem("allpages") != null) {
-  
   let retString = localStorage.getItem("allpages")
   let retArray = JSON.parse(retString)
   allPages = retArray
@@ -94,6 +101,9 @@ function ButtonInits() {
     addPage.addEventListener("click", function () {
         addNewPage(allPages.length)
     });
+    loginButt.addEventListener("click", function() {
+      login();
+    })
 }
 function CheckPage() {
   for (let i = 0; i < allPages.length; i++) {
