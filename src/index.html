@@ -6,103 +6,18 @@
 </head>
 <body>
     <div id = "login">
-        <title>Login Screen</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-
-    .login-container {
-      background-color: #fff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-      overflow: hidden;
-      width: 300px;
-      text-align: center;
-    }
-
-    .form-container {
-      padding: 20px;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      box-sizing: border-box;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #4caf50;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #45a049;
-    }
-
-    .switch-container {
-      background-color: #f1f1f1;
-      padding: 10px;
-      text-align: center;
-    }
-
-    .switch {
-      color: #4caf50;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-  </style>
-</head>
-  <div class="login-container">
-    <div class="form-container" id="login-form">
-      <h2>Login</h2>
-      <form action="#" method="post">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-      </form>
-    </div>
-    <div class="form-container" id="signup-form" style="display: none;">
-      <h2>Sign Up</h2>
-      <form action="#" method="post">
-        <input type="text" name="new-username" placeholder="New Username" required>
-        <input type="password" name="new-password" placeholder="New Password" required>
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
-    <div class="switch-container">
-      <p>Don't have an account? <span class="switch" onclick="toggleForm()">Sign up</span></p>
-    </div>
-  </div>
-
-  <script>
-    function toggleForm() {
-      var loginForm = document.getElementById('login-form');
-      var signupForm = document.getElementById('signup-form');
-
-      if (loginForm.style.display === 'none') {
-        loginForm.style.display = 'block';
-        signupForm.style.display = 'none';
-      } else {
-        loginForm.style.display = 'none';
-        signupForm.style.display = 'block';
-      }
-    }
-  </script>
-
+        <body id="login-body">
+            <div id="login-container">
+                <form id="loginForm">
+                    <label id="username-label" for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+        
+                    <label id="password-label" for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+        
+                    <button id="signIN" type="button">Login</button>
+                </form>
+            </div>
     </div>
     <div class="app-container" id = "app-container">
         <button id = "loginButt">login</button>

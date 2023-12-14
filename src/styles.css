@@ -1,3 +1,12 @@
+#loginButt {
+  position: absolute;
+  z-index: 1;
+  padding: 0;
+  margin-top: 10px;
+  margin-left: 20px;
+  width: 100px;
+  height: 30px;
+}
 body {
   overflow: hidden;
   outline: none;
@@ -245,4 +254,15 @@ font-family: 'Times New Roman', Times, serif;
 }
 #folder-list {
   text-align: center;
+}
+#loginForm {
+  text-align: center;
+  margin-left: 115%;
+  margin-top: 15%;
+}
+#login {
+  text-align: center;
+  visibility: hidden;
+  position: absolute;
+  z-index: 200;
 }

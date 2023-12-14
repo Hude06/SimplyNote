@@ -5,30 +5,26 @@ let textBox = document.getElementById("textBox")
 let pageList = document.getElementById("page-list")
 let title = document.getElementById("title")
 let loginButt = document.getElementById("loginButt")
-let loginPage = document.getElementById("login")
-let notePage = document.getElementById("app-container")
 let IDOn = 0;
 let allPages = []
 let pageOn = ""
+let fetchedPages = ""
 function login() {
-  console.log("Logging in")
-  loginPage.style.visibility = "vissible"
-  notePage.style.visibility = "hidden"
+  document.getElementById("login").style.visibility = "visible"
+  document.getElementById("signIN").addEventListener("click", function () {
+    document.getElementById("login").style.visibility = "hidden"
+  });
 }
 function fetchPages(userId) {
   fetch(`http://localhost:5500/pages/${userId}`)
   .then(response => response.json())
   .then(pages => {
-    console.log('Pages for user:', pages);
+    fetchedPages = pages
   })
-  
   .catch(error => {
     console.error('Error:', error);
   });
-
-
 }
-
 function postData(userId,userData,pageSending) {
   console.log(pageSending)
   fetch('http://localhost:5500/save', {
@@ -54,22 +50,25 @@ class Page {
     this.text = text 
   }
 }
-console.log(fetchPages("Jude"))
-if (localStorage.getItem("allpages") != null) {
-  let retString = localStorage.getItem("allpages")
-  let retArray = JSON.parse(retString)
-  allPages = retArray
-  let saved = allPages[0]
-  textBox.innerHTML = (allPages[0].text)
-  title.innerHTML = allPages[0].title
-  pageOn = saved
-  for (let i = 0; i < allPages.length; i++) {
-    AddNewButton(i,allPages)
-  }
-  for (let i = 0; i < allPages.length; i++) {
-    document.getElementById(allPages[i].id).innerHTML = allPages[i].title
-  }
-  CheckPage();
+fetchPages("Jude")
+if (fetchedPages !== null) {
+  console.log("Not Empty")
+  setTimeout(() => {
+    console.log(fetchedPages.pages)
+    for (let i = 0; i < fetchedPages.pages.length; i++) {
+      let retArray = JSON.parse(fetchedPages.pages[i].content)
+      console.log(retArray)
+      allPages.push(new Page(retArray.title,retArray.text))
+    }
+    textBox.innerHTML = (allPages[0].text)
+    title.innerHTML = allPages[0].title
+    console.log(allPages)
+    for (let i = 0; i < allPages.length; i++) {
+      AddNewButton(i,allPages)
+    }
+    CheckPage();
+
+  }, 100);  
 }
 function AddNewButton(name,array) {
   var newButton = document.createElement("Button");
@@ -102,6 +101,7 @@ function ButtonInits() {
         addNewPage(allPages.length)
     });
     loginButt.addEventListener("click", function() {
+      console.log("Logging In")
       login();
     })
 }
