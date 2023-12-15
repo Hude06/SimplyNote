@@ -8,11 +8,15 @@ let loginButt = document.getElementById("loginButt")
 let IDOn = 0;
 let allPages = []
 let pageOn = ""
-let fetchedPages = ""
+let fetchedPages = null
+let Uname = null
 function login() {
   document.getElementById("login").style.visibility = "visible"
   document.getElementById("signIN").addEventListener("click", function () {
     document.getElementById("login").style.visibility = "hidden"
+    Uname = document.getElementById("username").value
+    fetchPages(Uname)
+
   });
 }
 function fetchPages(userId) {
@@ -20,13 +24,24 @@ function fetchPages(userId) {
   .then(response => response.json())
   .then(pages => {
     fetchedPages = pages
+    console.log(fetchedPages.pages.length)
+    if (fetchedPages !== null && fetchedPages.pages.length !== 0) {
+      console.log("Not Empty")
+        for (let i = 0; i < fetchedPages.pages.length; i++) {
+          let retArray = JSON.parse(fetchedPages.pages[i].content)
+          allPages.push(new Page(retArray.title,retArray.text,retArray.id))
+        }
+        textBox.innerHTML = (allPages[0].text)
+        title.innerHTML = allPages[0].title
+        for (let i = 0; i < allPages.length; i++) {
+          AddNewButton(i,allPages)
+        }
+        CheckPage();
+    }
   })
-  .catch(error => {
-    console.error('Error:', error);
-  });
 }
 function postData(userId,userData,pageSending) {
-  console.log(pageSending)
+  console.log(userData,pageSending)
   fetch('http://localhost:5500/save', {
     method: 'POST',
     headers: {
@@ -44,32 +59,21 @@ function postData(userId,userData,pageSending) {
   });
 }
 class Page {
-  constructor(title,text) {
-    this.id = title;
+  constructor(title,text,id) {
+    if (id) {
+      this.id = id
+    } else {
+      this.id = title;
+
+    }
     this.title = title
     this.text = text 
   }
 }
-fetchPages("Jude")
-if (fetchedPages !== null) {
-  console.log("Not Empty")
-  setTimeout(() => {
-    console.log(fetchedPages.pages)
-    for (let i = 0; i < fetchedPages.pages.length; i++) {
-      let retArray = JSON.parse(fetchedPages.pages[i].content)
-      console.log(retArray)
-      allPages.push(new Page(retArray.title,retArray.text))
-    }
-    textBox.innerHTML = (allPages[0].text)
-    title.innerHTML = allPages[0].title
-    console.log(allPages)
-    for (let i = 0; i < allPages.length; i++) {
-      AddNewButton(i,allPages)
-    }
-    CheckPage();
-
-  }, 100);  
+if (Uname !== null) {
+  fetchPages(Uname)
 }
+
 function AddNewButton(name,array) {
   var newButton = document.createElement("Button");
   newButton.textContent = name;
@@ -83,8 +87,6 @@ function addNewPage(name) {
     newButton.id = allPages.length;
     allPages.push(new Page(allPages.length,"Type"))
     CheckPage();
-    let string = JSON.stringify(allPages)
-    localStorage.setItem("allpages", string)
 }   
 function keyboardInit() {
     window.addEventListener("keydown", function (event) {
@@ -116,19 +118,19 @@ function CheckPage() {
   }
 }
 function loop() {
+  console.log("Running")
   if (typing) {
-    pageOn.text = textBox.innerHTML 
-    pageOn.title = title.innerHTML
-    document.getElementById(pageOn.id).innerHTML = pageOn.title
-    let string = JSON.stringify(allPages)
-    let string2 = JSON.stringify(allPages[pageOn.id])
-    localStorage.setItem("allpages", string)
-    postData("Jude",string2,pageOn.id)
+    if (pageOn !== "") {
+      pageOn.text = textBox.innerHTML 
+      pageOn.title = title.innerHTML
+      document.getElementById(pageOn.id).innerHTML = pageOn.title
+      let string2 = JSON.stringify(allPages[pageOn.id])
+      console.log(string2)
+      postData(Uname,string2,pageOn.id)    
+    }
   }
     requestAnimationFrame(loop)
 }
-console.log("RANNNNNNN")
-
 ButtonInits();
 keyboardInit();
 loop();

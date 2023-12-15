@@ -10,13 +10,9 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 5500;
-
-// Allow requests from http://127.0.0.1:1430 (or your specific client-side origin)
 app.use(cors({ origin: 'http://127.0.0.1:1430' }));
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -59,7 +55,8 @@ app.get('/pages/:userId', (req, res) => {
   const userDir = path.join(__dirname, 'users', userId);
 
   if (!fs.existsSync(userDir)) {
-    return res.status(404).send('User not found');
+    fs.mkdirSync(userDir);
+    return res.send('User not found, Creating User');
   }
 
   const pages = [];
