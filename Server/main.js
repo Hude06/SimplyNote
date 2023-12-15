@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 3500;
-app.use(cors({ origin: 'http://apps.hude.earth:1430' }));
+app.use(cors({ origin: 'http://127.0.0.1:1430' }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
