@@ -11,13 +11,13 @@ let allPages = []
 let pageOn = ""
 let fetchedPages = null
 let Uname = null
-function makeALiveSite(date) {
+function makeALiveSite(userData) {
   fetch('http://apps.hude.earth:3500/saveData', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ date }),
+    body: JSON.stringify({ userData }),
   })
   .then(response => response.text())
   .then(data => {
