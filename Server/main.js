@@ -68,7 +68,6 @@ app.get('/pages/:userId', (req, res) => {
   });
 
   // Send the list of pages with content as a response
-  console.log(pages)
   res.json({ pages });
 });
 app.get('/saveData', (req, res) => {
@@ -82,7 +81,7 @@ app.get('/saveData', (req, res) => {
 
   // Save the data to the HTML file
   fs.writeFileSync(filePath, userData);
-
+  console.log("SAVING THE HTML")
   res.send('Data saved successfully!');
 });
 
