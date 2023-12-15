@@ -71,6 +71,20 @@ app.get('/pages/:userId', (req, res) => {
   console.log(pages)
   res.json({ pages });
 });
+app.get('/saveData', (req, res) => {
+  const userData = req.body.userData;
+
+  // Generate a unique filename (you may want to use a more robust method)
+  const fileName = `user_data_${Date.now()}.html`;
+  
+  // Path to the file
+  const filePath = path.join(__dirname, 'saved_data', fileName);
+
+  // Save the data to the HTML file
+  fs.writeFileSync(filePath, userData);
+
+  res.send('Data saved successfully!');
+});
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
