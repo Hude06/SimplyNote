@@ -68,9 +68,7 @@ app.get('/pages/:userId', (req, res) => {
   res.json({ pages });
 });
 app.post('/saveData', (req, res) => {
-  
   const userData = req.body.userData;
-  console.log(userData)
   // Generate a unique filename (you may want to use a more robust method)
   const fileName = `user_data_${Date.now()}.html`;
   
@@ -79,7 +77,6 @@ app.post('/saveData', (req, res) => {
 
   // Save the data to the HTML file
   fs.writeFileSync(filePath, userData);
-  console.log("SAVING THE HTML")
   res.send('Data saved successfully!');
 });
 
