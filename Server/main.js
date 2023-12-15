@@ -26,7 +26,6 @@ app.post('/save', (req, res) => {
   if (!userId || !userData) {
     return res.status(400).send('User ID and data are required');
   }
-  console.log(req.body)
   const userDir = path.join(__dirname, 'users', userId);
 
   // Create a directory for each user if it doesn't exist
@@ -71,6 +70,7 @@ app.get('/pages/:userId', (req, res) => {
   res.json({ pages });
 });
 app.get('/saveData', (req, res) => {
+  console.log
   const userData = req.body.userData;
 
   // Generate a unique filename (you may want to use a more robust method)
