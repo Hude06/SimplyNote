@@ -2,8 +2,8 @@
   position: absolute;
   z-index: 1;
   padding: 0;
-  margin-top: 10px;
-  margin-left: 20px;
+  margin-top: 15px;
+  margin-left: 15%;
   width: 100px;
   height: 30px;
 }
@@ -265,4 +265,18 @@ font-family: 'Times New Roman', Times, serif;
   visibility: hidden;
   position: absolute;
   z-index: 200;
+}
+#Settings {
+  position: absolute;
+  z-index: 2;
+  margin-left: 0%;
+  margin-top: 1%;
+  background-color: transparent;
+  background-image:url('./assets/ThreeDots.png');
+  width:90px; /*width of your image*/
+  height:40px; /*height of your image*/
+  background-size: cover; /* or contain */
+  background-position: center; /* or top, bottom, left, right */
+  box-shadow: none; /* or box-shadow: 0 0 0 0; */
+
 }

@@ -73,7 +73,6 @@ class Page {
 if (Uname !== null) {
   fetchPages(Uname)
 }
-
 function AddNewButton(name,array) {
   var newButton = document.createElement("Button");
   newButton.textContent = name;
