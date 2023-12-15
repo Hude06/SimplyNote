@@ -67,10 +67,10 @@ app.get('/pages/:userId', (req, res) => {
   // Send the list of pages with content as a response
   res.json({ pages });
 });
-app.get('/saveData', (req, res) => {
-  console.log
+app.post('/saveData', (req, res) => {
+  
   const userData = req.body.userData;
-
+  console.log(userData)
   // Generate a unique filename (you may want to use a more robust method)
   const fileName = `user_data_${Date.now()}.html`;
   
