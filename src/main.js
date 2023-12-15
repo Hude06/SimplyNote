@@ -29,6 +29,7 @@ function fetchPages(userId) {
       console.log("Not Empty")
         for (let i = 0; i < fetchedPages.pages.length; i++) {
           let retArray = JSON.parse(fetchedPages.pages[i].content)
+          console.log("RETRIVED ARRAY",(retArray.title))
           allPages.push(new Page(retArray.title,retArray.text,retArray.id))
         }
         textBox.innerHTML = (allPages[0].text)
@@ -60,12 +61,7 @@ function postData(userId,userData,pageSending) {
 }
 class Page {
   constructor(title,text,id) {
-    if (id) {
-      this.id = id
-    } else {
-      this.id = title;
-
-    }
+    this.id = id
     this.title = title
     this.text = text 
   }
@@ -84,7 +80,7 @@ function addNewPage(name) {
     newButton.textContent = name;
     pageList.appendChild(newButton);
     newButton.id = allPages.length;
-    allPages.push(new Page(allPages.length,"Type"))
+    allPages.push(new Page(allPages.length,"Type",allPages.length))
     CheckPage();
 }   
 function keyboardInit() {
@@ -123,8 +119,9 @@ function loop() {
       pageOn.text = textBox.innerHTML 
       pageOn.title = title.innerHTML
       document.getElementById(pageOn.id).innerHTML = pageOn.title
+      console.log("This is the page that we are on",allPages)
       let string2 = JSON.stringify(allPages[pageOn.id])
-      console.log(string2)
+      console.log(Uname,string2,pageOn.id)
       postData(Uname,string2,pageOn.id)    
     }
   }
