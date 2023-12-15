@@ -44,8 +44,6 @@ app.post('/save', (req, res) => {
       return res.status(500).send('Error saving data');
     }
 
-    console.log('Data saved successfully!');
-    res.send('Data saved successfully!');
   });
 });
 // Request all pages for a user endpoint
