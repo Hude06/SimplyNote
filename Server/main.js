@@ -69,15 +69,24 @@ app.get('/pages/:userId', (req, res) => {
 });
 app.post('/saveData', (req, res) => {
   const userData = req.body.userData;
-  // Generate a unique filename (you may want to use a more robust method)
-  const fileName = `user_data_${Date.now()}.html`;
-  
-  // Path to the file
-  const filePath = path.join(__dirname, 'saved_data', fileName);
 
-  // Save the data to the HTML file
-  fs.writeFileSync(filePath, userData);
-  res.send('Data saved successfully!');
+
+  if (!userId || !userData) {
+    return res.status(400).send('User ID and data are required');
+  }
+
+  // Generate a unique filename based on timestamp
+  const filename = Date.now()+".html";
+
+  const filePath = path.join("saved_data", filename);
+
+  fs.writeFile(filePath, userData, (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Error saving data');
+    }
+
+  });
 });
 
 app.listen(port, () => {
