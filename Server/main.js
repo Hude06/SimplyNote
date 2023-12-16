@@ -71,7 +71,7 @@ app.post('/saveData', (req, res) => {
   const userData = req.body.userData;
 
 
-  if (!userId || !userData) {
+  if (!userData) {
     return res.status(400).send('User ID and data are required');
   }
 
