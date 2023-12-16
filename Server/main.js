@@ -69,8 +69,7 @@ app.get('/pages/:userId', (req, res) => {
 });
 app.post('/saveData', (req, res) => {
   const userData = ("Hello");
-
-
+  console.log("DATAAA",req.body.userData)
   if (!userData) {
     return res.status(400).send('User ID and data are required');
   }
