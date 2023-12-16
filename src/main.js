@@ -159,7 +159,8 @@ function ButtonInits() {
     })
     LiveSiteButt.addEventListener("click", function() {
       console.log("Making A New Live Site")
-      makeALiveSite(JSON.stringify(allPages[pageOn.id]))
+      console.log(JSON.stringify(allPages[pageOn.id].text))
+      makeALiveSite(JSON.stringify(allPages[pageOn.id].text))
     })
 }
 function CheckPage() {

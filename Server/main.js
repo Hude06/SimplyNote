@@ -68,25 +68,7 @@ app.get('/pages/:userId', (req, res) => {
   res.json({ pages });
 });
 app.post('/saveData', (req, res) => {
-  console.log("Started")
-  const userData = ("Hello");
-  console.log("DATAAA",req.body.userData)
-  if (!userData) {
-    return res.status(400).send('User ID and data are required');
-  }
 
-  // Generate a unique filename based on timestamp
-  const filename = Date.now()+".html";
-
-  const filePath = path.join("saved_data", filename);
-
-  fs.writeFile(filePath, userData, (err) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send('Error saving data');
-    }
-
-  });
 });
 
 app.listen(port, () => {
