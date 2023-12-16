@@ -68,6 +68,7 @@ app.get('/pages/:userId', (req, res) => {
   res.json({ pages });
 });
 app.post('/saveData', (req, res) => {
+  console.log("Started")
   const userData = ("Hello");
   console.log("DATAAA",req.body.userData)
   if (!userData) {
