@@ -26,6 +26,7 @@ app.post('/save', (req, res) => {
   if (!userId || !userData) {
     return res.status(400).send('User ID and data are required');
   }
+  console.log(req.body)
   const userDir = path.join(__dirname, 'users', userId);
 
   // Create a directory for each user if it doesn't exist
@@ -44,6 +45,8 @@ app.post('/save', (req, res) => {
       return res.status(500).send('Error saving data');
     }
 
+    console.log('Data saved successfully!');
+    res.send('Data saved successfully!');
   });
 });
 // Request all pages for a user endpoint
@@ -65,8 +68,10 @@ app.get('/pages/:userId', (req, res) => {
   });
 
   // Send the list of pages with content as a response
+  console.log(pages)
   res.json({ pages });
 });
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

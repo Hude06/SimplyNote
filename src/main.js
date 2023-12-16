@@ -5,54 +5,18 @@ let textBox = document.getElementById("textBox")
 let pageList = document.getElementById("page-list")
 let title = document.getElementById("title")
 let loginButt = document.getElementById("loginButt")
-let LiveSiteButt = document.getElementById("LiveSite")
 let IDOn = 0;
 let allPages = []
 let pageOn = ""
 let fetchedPages = null
 let Uname = null
-if (getCookie("Uname") !== null) {
-  Uname = getCookie("Uname")
-  console.log("Got the Uname from the Cookie")
-}
-function getCookie(name) {
-  var nameEQ = name + "=";
-  var cookies = document.cookie.split(';');
-  
-  for(var i = 0; i < cookies.length; i++) {
-      var cookie = cookies[i];
-      while (cookie.charAt(0) === ' ') {
-          cookie = cookie.substring(1, cookie.length);
-      }
-      if (cookie.indexOf(nameEQ) === 0) {
-          return cookie.substring(nameEQ.length, cookie.length);
-      }
-  }
-  
-  return null;
-}
-function setCookie(name, value, days) {
-  var expires = "";
-  
-  if (days) {
-      var date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      expires = "; expires=" + date.toUTCString();
-  }
-  
-  document.cookie = name + "=" + value + expires + "; path=/";
-}
 function login() {
   document.getElementById("login").style.visibility = "visible"
   document.getElementById("signIN").addEventListener("click", function () {
     document.getElementById("login").style.visibility = "hidden"
-    if (Uname === null) {
-      Uname = document.getElementById("username").value
-      setCookie("Uname",Uname,1)
-      fetchPages(Uname)
-    } else {
-      alert("Already Loged In")
-    }
+    Uname = document.getElementById("username").value
+    fetchPages(Uname)
+
   });
 }
 function fetchPages(userId) {
@@ -131,11 +95,7 @@ function keyboardInit() {
 }
 function ButtonInits() {
     addPage.addEventListener("click", function () {
-      if (Uname !== null) {
         addNewPage(allPages.length)
-      } else {
-        alert("Please Login Or Sign Up First")
-      }
     });
     loginButt.addEventListener("click", function() {
       console.log("Logging In")
