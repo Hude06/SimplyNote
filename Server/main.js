@@ -67,10 +67,6 @@ app.get('/pages/:userId', (req, res) => {
   // Send the list of pages with content as a response
   res.json({ pages });
 });
-app.get('/saveData', (req, res) => {
-  console.log(req,res)
-});
-
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

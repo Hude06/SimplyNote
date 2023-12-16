@@ -19,13 +19,6 @@ function makeALiveSite(userData) {
     },
     body: ({ userData }),
   })
-  .then(response => response.text())
-  .then(data => {
-    console.log(data);
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
 }
 if (getCookie("Uname") !== null) {
   Uname = getCookie("Uname")
