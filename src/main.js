@@ -17,7 +17,7 @@ function makeALiveSite(userData) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ userData }),
+    body: ({ userData }),
   })
   .then(response => response.text())
   .then(data => {
@@ -159,7 +159,7 @@ function ButtonInits() {
     })
     LiveSiteButt.addEventListener("click", function() {
       console.log("Making A New Live Site")
-      makeALiveSite((pageOn))
+      makeALiveSite(JSON.stringify(pageOn))
     })
 }
 function CheckPage() {
