@@ -11,15 +11,6 @@ let allPages = []
 let pageOn = ""
 let fetchedPages = null
 let Uname = null
-function makeALiveSite(userData) {
-  fetch('http://apps.hude.earth:3500/saveData', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: ({ userData }),
-  })
-}
 if (getCookie("Uname") !== null) {
   Uname = getCookie("Uname")
   console.log("Got the Uname from the Cookie")
@@ -149,11 +140,6 @@ function ButtonInits() {
     loginButt.addEventListener("click", function() {
       console.log("Logging In")
       login();
-    })
-    LiveSiteButt.addEventListener("click", function() {
-      console.log("Making A New Live Site")
-      console.log(JSON.stringify(allPages[pageOn.id].text))
-      makeALiveSite(JSON.stringify(allPages[pageOn.id].text))
     })
 }
 function CheckPage() {
