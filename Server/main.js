@@ -31,9 +31,6 @@ app.post('/save', (req, res) => {
   const userDir = path.join(__dirname, 'users', userId);
 
   // Create a directory for each user if it doesn't exist
-  if (fs.existsSync('./users/' + userId),"password.txt") {
-    console.log("Password Exsists")
-  }
   if (!fs.existsSync(userDir)) {
     fs.mkdirSync(userDir);
   }
