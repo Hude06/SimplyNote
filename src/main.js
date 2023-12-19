@@ -10,6 +10,8 @@ let allPages = []
 let pageOn = ""
 let fetchedPages = null
 let Uname = null
+var input = document.createElement('input');
+
 function login() {
   document.getElementById("login").style.visibility = "visible"
   document.getElementById("signIN").addEventListener("click", function () {
@@ -35,7 +37,7 @@ function fetchPages(userId) {
         textBox.innerHTML = (allPages[0].text)
         title.innerHTML = allPages[0].title
         for (let i = 0; i < allPages.length; i++) {
-          AddNewButton(i,allPages)
+          AddNewButton(i,allPages,allPages[i].title)
         }
         CheckPage();
     }
@@ -71,7 +73,7 @@ if (Uname !== null) {
 }
 function AddNewButton(name,array) {
   var newButton = document.createElement("Button");
-  newButton.textContent = name;
+  newButton.textContent = name
   newButton.id = array[name].id;
   pageList.appendChild(newButton);
 }
@@ -100,6 +102,15 @@ function ButtonInits() {
     loginButt.addEventListener("click", function() {
       console.log("Logging In")
       login();
+    })
+    document.getElementById("inputfile").addEventListener('change', function () {
+
+        let fr = new FileReader();
+        fr.onload = function () {
+            console.log(fr.result);
+        }
+
+        fr.readAsBinaryString(this.files[0]);
     })
 }
 function CheckPage() {
