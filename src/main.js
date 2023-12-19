@@ -11,14 +11,14 @@ let pageOn = ""
 let fetchedPages = null
 let Uname = null
 var input = document.createElement('input');
-
+let logedIN = false;
 function login() {
   document.getElementById("login").style.visibility = "visible"
   document.getElementById("signIN").addEventListener("click", function () {
     document.getElementById("login").style.visibility = "hidden"
     Uname = document.getElementById("username").value
     fetchPages(Uname)
-
+    logedIN = true;
   });
 }
 function fetchPages(userId) {
@@ -77,12 +77,16 @@ function AddNewButton(name,array) {
   newButton.id = array[name].id;
   pageList.appendChild(newButton);
 }
-function addNewPage(name) {
+function addNewPage(name,text) {
     var newButton = document.createElement("Button");
     newButton.textContent = name;
     pageList.appendChild(newButton);
     newButton.id = allPages.length;
-    allPages.push(new Page(allPages.length,"Type",allPages.length))
+    if (text) {
+      allPages.push(new Page(allPages.length,text,allPages.length))
+    } else {
+      allPages.push(new Page(allPages.length,"Type",allPages.length))
+    }
     CheckPage();
 }   
 function keyboardInit() {
@@ -108,6 +112,11 @@ function ButtonInits() {
         let fr = new FileReader();
         fr.onload = function () {
             console.log(fr.result);
+            if (logedIN) {
+              addNewPage(allPages.length,fr.result)
+            } else {
+              alert("Please Log In")
+            }
         }
 
         fr.readAsBinaryString(this.files[0]);
