@@ -10,6 +10,7 @@ let allPages = []
 let pageOn = ""
 let fetchedPages = null
 let Uname = null
+let password = null;
 var input = document.createElement('input');
 let logedIN = false;
 function login() {
@@ -17,6 +18,7 @@ function login() {
   document.getElementById("signIN").addEventListener("click", function () {
     document.getElementById("login").style.visibility = "hidden"
     Uname = document.getElementById("username").value
+    password = document.getElementById("password").value
     fetchPages(Uname)
     logedIN = true;
   });
@@ -43,14 +45,14 @@ function fetchPages(userId) {
     }
   })
 }
-function postData(userId,userData,pageSending) {
+function postData(userId,userData,pageSending,userPassword) {
   console.log(userData,pageSending)
   fetch('http://apps.hude.earth:3500/save', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ userId, userData, pageSending }),
+    body: JSON.stringify({ userId, userData, pageSending, userPassword }),
   })
   .then(response => response.text())
   .then(data => {
@@ -101,7 +103,11 @@ function keyboardInit() {
 }
 function ButtonInits() {
     addPage.addEventListener("click", function () {
-        addNewPage(allPages.length)
+      if (logedIN) {
+        addNewPage(allPages.length);
+      } else {
+        alert("Please Log In First")
+      }
     });
     loginButt.addEventListener("click", function() {
       console.log("Logging In")
@@ -142,7 +148,7 @@ function loop() {
       console.log("This is the page that we are on",allPages)
       let string2 = JSON.stringify(allPages[pageOn.id])
       console.log(Uname,string2,pageOn.id)
-      postData(Uname,string2,pageOn.id)    
+      postData(Uname,string2,pageOn.id,password)    
     }
   }
     requestAnimationFrame(loop)

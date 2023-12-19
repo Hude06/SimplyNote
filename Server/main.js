@@ -26,10 +26,14 @@ app.post('/save', (req, res) => {
   if (!userId || !userData) {
     return res.status(400).send('User ID and data are required');
   }
+
   console.log(req.body)
   const userDir = path.join(__dirname, 'users', userId);
 
   // Create a directory for each user if it doesn't exist
+  if (fs.existsSync('./users/' + userId),"password.txt") {
+    console.log("Password Exsists")
+  }
   if (!fs.existsSync(userDir)) {
     fs.mkdirSync(userDir);
   }
@@ -38,7 +42,6 @@ app.post('/save', (req, res) => {
   const filename = page+".txt";
 
   const filePath = path.join(userDir, filename);
-
   fs.writeFile(filePath, userData, (err) => {
     if (err) {
       console.error(err);
