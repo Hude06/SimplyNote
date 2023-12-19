@@ -10,7 +10,6 @@ let allPages = []
 let pageOn = ""
 let fetchedPages = null
 let Uname = null
-let password = null;
 var input = document.createElement('input');
 let logedIN = false;
 function login() {
@@ -18,7 +17,6 @@ function login() {
   document.getElementById("signIN").addEventListener("click", function () {
     document.getElementById("login").style.visibility = "hidden"
     Uname = document.getElementById("username").value
-    password = document.getElementById("password").value
     fetchPages(Uname)
     logedIN = true;
   });
@@ -45,14 +43,14 @@ function fetchPages(userId) {
     }
   })
 }
-function postData(userId,userData,pageSending,userPassword) {
+function postData(userId,userData,pageSending) {
   console.log(userData,pageSending)
   fetch('http://apps.hude.earth:3500/save', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ userId, userData, pageSending, userPassword }),
+    body: JSON.stringify({ userId, userData, pageSending }),
   })
   .then(response => response.text())
   .then(data => {
@@ -148,7 +146,7 @@ function loop() {
       console.log("This is the page that we are on",allPages)
       let string2 = JSON.stringify(allPages[pageOn.id])
       console.log(Uname,string2,pageOn.id)
-      postData(Uname,string2,pageOn.id,password)    
+      postData(Uname,string2,pageOn.id)    
     }
   }
     requestAnimationFrame(loop)
