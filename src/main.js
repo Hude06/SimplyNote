@@ -12,6 +12,7 @@ let fetchedPages = null
 let Uname = null
 var input = document.createElement('input');
 let logedIN = false;
+let connectedServer = false;
 function login() {
   document.getElementById("login").style.visibility = "visible"
   document.getElementById("signIN").addEventListener("click", function () {
@@ -40,8 +41,14 @@ function fetchPages(userId) {
           AddNewButton(i,allPages,allPages[i].title)
         }
         CheckPage();
+        connectedServer = true;
     }
   })
+  setTimeout(() => {
+    if (connectedServer === false) {
+      alert("Server is Not Online")
+    }  
+  }, 1500);
 }
 function postData(userId,userData,pageSending) {
   console.log(userData,pageSending)
