@@ -1,5 +1,6 @@
 let typing = false;
 let currentKey = new Map();
+let navKey = new Map();
 let addPage = document.getElementById("add-page")
 let textBox = document.getElementById("textBox")
 let pageList = document.getElementById("page-list")
@@ -13,6 +14,15 @@ let Uname = null
 var input = document.createElement('input');
 let logedIN = false;
 let connectedServer = false;
+let HYPERLINK = false;
+function PopUp(text) {
+  document.getElementById("popup").style.visibility = "visible"
+  document.getElementById("ok").addEventListener("click", () => {
+    textBox.innerHTML += '<a href="'+document.getElementById("LINK").innerHTML+'"target="_blank">Visit W3Schools</a>'
+    document.getElementById("popup").style.visibility = "hidden"
+  })
+  HYPERLINK = false
+}
 function login() {
   document.getElementById("login").style.visibility = "visible"
   document.getElementById("signIN").addEventListener("click", function () {
@@ -100,10 +110,14 @@ function keyboardInit() {
     window.addEventListener("keydown", function (event) {
       typing = true
       currentKey.set(event.key, true);
+      navKey.set(event.key, true);
+
     });
     window.addEventListener("keyup", function (event) {
       typing = false;
       currentKey.set(event.key, false);
+      navKey.set(event.key, false);
+
     });
 }
 function ButtonInits() {
@@ -140,8 +154,15 @@ function CheckPage() {
   }
 }
 function loop() {
-  console.log("Running")
+  console.log("Loop Is Running")
   if (typing) {
+    if (HYPERLINK === false) {
+      console.log("GETTING RAN")
+      if (navKey.get("/")) {
+        HYPERLINK = true;
+        PopUp("LINK")
+      }
+    }
     if (pageOn !== "") {
       pageOn.text = textBox.innerHTML 
       pageOn.title = title.innerHTML
@@ -151,8 +172,9 @@ function loop() {
       console.log(Uname,string2,pageOn.id)
       postData(Uname,string2,pageOn.id)    
     }
+    navKey.clear();
   }
-    requestAnimationFrame(loop)
+  requestAnimationFrame(loop)
 }
 ButtonInits();
 keyboardInit();
