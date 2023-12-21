@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = 3500;
 let currentOnlineUsers = 0;
-app.use(cors({ origin: ['http://127.0.0.1:1430', 'http://127.0.1:5500'] }));
+app.use(cors({ origin: ['*'] }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
