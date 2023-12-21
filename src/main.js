@@ -21,7 +21,6 @@ function PopUp(text) {
     textBox.innerHTML += '<a href="'+document.getElementById("LINK").innerHTML+'"target="_blank">Visit W3Schools</a>'
     document.getElementById("popup").style.visibility = "hidden"
   })
-  HYPERLINK = false
 }
 function login() {
   document.getElementById("login").style.visibility = "visible"
