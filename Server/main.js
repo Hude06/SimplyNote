@@ -70,9 +70,8 @@ app.get('/pages/:userId', (req, res) => {
   res.json({ pages });
 });
 app.get('/online', (req,res) => {
-  if (currentOnlineUsers) {
+  console.log("Trying to fetch")
     res.send(currentOnlineUsers);
-  }
 })
 
 app.listen(port, () => {
