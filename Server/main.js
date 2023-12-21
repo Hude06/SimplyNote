@@ -7,22 +7,20 @@ import path from 'path';
 
 const __filename = new URL(import.meta.url).pathname;
 const __dirname = path.dirname(__filename);
-
 const app = express();
 const port = 3500;
+let currentOnlineUsers = 0;
 app.use(cors({ origin: 'http://127.0.0.1:1430' }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
-
 app.post('/save', (req, res) => {
   const userId = req.body.userId;
   const userData = req.body.userData;
   const page = req.body.pageSending;
-
-
+  currentOnlineUsers += 1;
   if (!userId || !userData) {
     return res.status(400).send('User ID and data are required');
   }
@@ -71,6 +69,11 @@ app.get('/pages/:userId', (req, res) => {
   console.log(pages)
   res.json({ pages });
 });
+app.get('/online', (req,res) => {
+  if (currentOnlineUsers) {
+    res.send(currentOnlineUsers);
+  }
+})
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

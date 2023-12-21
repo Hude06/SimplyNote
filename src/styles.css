@@ -236,22 +236,21 @@ font-family: 'Times New Roman', Times, serif;
   background-image: url('./assets/File.png');
   border: none;
 }
-#add-folder {
+#settings {
   position: absolute;
   z-index: 10;
-  top: 20px;
-  left: 275px;
+  top: 525px;
+  left: 20px;
   background-size: 60%; /* This property sets the size of the background image */
-  height: 30px;
+  height: 100px;
   background-repeat: no-repeat;
   background-color: transparent;
   box-shadow: none;
-  background-image: url('./assets/Folder.png');
+  background-image: url('./assets/Gear.png');
   overflow: hidden;
   user-select: none;
   outline: none;
   border: none;
-
 }
 #folder-list button {
   text-align: center;
@@ -293,4 +292,9 @@ font-family: 'Times New Roman', Times, serif;
   height: 100vh;
   z-index: 500;
   visibility: hidden;
+}
+#settingsPage {
+  visibility: hidden;
+  position: absolute;
+  z-index: 200;
 }

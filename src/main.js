@@ -6,6 +6,7 @@ let textBox = document.getElementById("textBox")
 let pageList = document.getElementById("page-list")
 let title = document.getElementById("title")
 let loginButt = document.getElementById("loginButt")
+let SettingsButton = document.getElementById("settings")
 let IDOn = 0;
 let allPages = []
 let pageOn = ""
@@ -126,6 +127,9 @@ function ButtonInits() {
     loginButt.addEventListener("click", function() {
       console.log("Logging In")
       login();
+    })
+    SettingsButton.addEventListener("click", function() {
+      document.getElementById("settingsPage").style.visibility = "visible"
     })
     document.getElementById("inputfile").addEventListener('change', function () {
 
