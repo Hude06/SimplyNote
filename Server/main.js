@@ -24,8 +24,6 @@ app.post('/save', (req, res) => {
     if (currentOnlineUsers[i] === userId) {
       console.log("DOES == THE CURRENT USER")
     } else {
-      console.log("Does Not === the currentOnlineUsers")
-      currentOnlineUsers.push(userId)
     }
   }
   if (!userId || !userData) {
