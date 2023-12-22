@@ -72,6 +72,7 @@ app.get('/pages/:userId', (req, res) => {
 });
 app.post('/online', (req,res) => {
   console.log("Trying to fetch")
+  console.log(currentOnlineUsers)
   res.send("CurrentOnlineUsers " + currentOnlineUsers);
 })
 
