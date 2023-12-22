@@ -239,7 +239,7 @@ font-family: 'Times New Roman', Times, serif;
 #settings {
   position: absolute;
   z-index: 10;
-  top: 525px;
+  top: 95vh;
   left: 20px;
   background-size: 60%; /* This property sets the size of the background image */
   height: 100px;
