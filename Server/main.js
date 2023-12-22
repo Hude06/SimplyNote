@@ -70,9 +70,9 @@ app.get('/pages/:userId', (req, res) => {
   console.log(pages)
   res.json({ pages });
 });
-app.get('/online', (req,res) => {
+app.post('/online', (req,res) => {
   console.log("Trying to fetch")
-  res.send("CurrentOnlineUsers" + currentOnlineUsers);
+  res.send("CurrentOnlineUsers " + currentOnlineUsers);
 })
 
 
