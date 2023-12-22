@@ -22,6 +22,7 @@ app.post('/save', (req, res) => {
   const page = req.body.pageSending;
   for (let i = 0; i < currentOnlineUsers.length; i++) {
     if (currentOnlineUsers[i] === userId) {
+      console.log("DOES == THE CURRENT USER")
     } else {
       console.log("Does Not === the currentOnlineUsers")
       currentOnlineUsers.push(userId)
