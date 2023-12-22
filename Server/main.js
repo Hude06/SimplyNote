@@ -20,21 +20,20 @@ app.post('/save', (req, res) => {
   const userId = req.body.userId;
   const userData = req.body.userData;
   const page = req.body.pageSending;
-  currentOnlineUsers += 1;
+
   if (!userId || !userData) {
     return res.status(400).send('User ID and data are required');
   }
-  console.log(req.body)
+
+  console.log(req.body);
+
   const userDir = path.join(__dirname, 'users', userId);
 
-  // Create a directory for each user if it doesn't exist
   if (!fs.existsSync(userDir)) {
     fs.mkdirSync(userDir);
   }
 
-  // Generate a unique filename based on timestamp
-  const filename = page+".txt";
-
+  const filename = page + ".txt";
   const filePath = path.join(userDir, filename);
 
   fs.writeFile(filePath, userData, (err) => {
@@ -44,9 +43,11 @@ app.post('/save', (req, res) => {
     }
 
     console.log('Data saved successfully!');
-    res.send('Data saved successfully!');
+    currentOnlineUsers++;  // Increment currentOnlineUsers
+    res.status(200).send('Data saved successfully!');
   });
 });
+
 // Request all pages for a user endpoint
 app.get('/pages/:userId', (req, res) => {
   const userId = req.params.userId;
@@ -71,7 +72,7 @@ app.get('/pages/:userId', (req, res) => {
 });
 app.get('/online', (req,res) => {
   console.log("Trying to fetch")
-  res.send(currentOnlineUsers);
+  res.status(200).send("Resource created successfully");
 })
 
 app.listen(port, () => {
