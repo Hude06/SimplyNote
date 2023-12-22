@@ -72,7 +72,6 @@ app.get('/pages/:userId', (req, res) => {
 });
 app.get('/online', (req,res) => {
   console.log("Trying to fetch")
-  res.sendStatus(200)
   res.send("Resource created successfully");
 })
 
