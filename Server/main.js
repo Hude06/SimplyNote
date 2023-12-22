@@ -23,10 +23,12 @@ app.post('/save', (req, res) => {
   const page = req.body.pageSending;
   for (let i = 0; i < currentOnlineUsers.length; i++) {
     console.log(currentOnlineUsers[i])
-    if (currentOnlineUsers[i] === userId) {
-      newUser = false;
-    } else {
-      newUser = true;
+    if (newUser === false) {
+      if (currentOnlineUsers[i] === userId) {
+        newUser = false;
+      } else {
+        newUser = true;
+      }
     }
     if (newUser) {
       currentOnlineUsers.push(userId)
