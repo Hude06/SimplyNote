@@ -72,7 +72,7 @@ app.get('/pages/:userId', (req, res) => {
 });
 app.get('/online', (req,res) => {
   console.log("Trying to fetch")
-  res.status(200).send("Resource created successfully");
+  res.status(200).send(currentOnlineUsers);
 })
 
 app.listen(port, () => {
