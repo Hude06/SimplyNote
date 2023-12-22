@@ -30,6 +30,7 @@ app.post('/save', (req, res) => {
     }
     if (newUser) {
       currentOnlineUsers.push(userId)
+      newUser = false;
     }
   }
   if (!userId || !userData) {
