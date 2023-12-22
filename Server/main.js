@@ -30,7 +30,7 @@ app.post('/save', (req, res) => {
       }
     }
     console.log(newUser)
-    if (newUser) {
+    if (newUser === true) {
       currentOnlineUsers.push(userId)
       console.log("Pushing new user", userId)
 
