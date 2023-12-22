@@ -9,7 +9,7 @@ const __filename = new URL(import.meta.url).pathname;
 const __dirname = path.dirname(__filename);
 const app = express();
 const port = 3500;
-let currentOnlineUsers = 0;
+let currentOnlineUsers = [];
 app.use(cors({ origin: [ "*","http://127.0.0.1:1430"] }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,7 +20,7 @@ app.post('/save', (req, res) => {
   const userId = req.body.userId;
   const userData = req.body.userData;
   const page = req.body.pageSending;
-
+  currentOnlineUsers.push(userId)
   if (!userId || !userData) {
     return res.status(400).send('User ID and data are required');
   }
@@ -43,7 +43,6 @@ app.post('/save', (req, res) => {
     }
 
     console.log('Data saved successfully!');
-    currentOnlineUsers++;  // Increment currentOnlineUsers
     res.status(200).send('Data saved successfully!');
   });
 });
