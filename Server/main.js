@@ -24,7 +24,7 @@ app.post('/save', (req, res) => {
   for (let i = 0; i < currentOnlineUsers.length; i++) {
     console.log(JSON.stringify(userId))
     if (newUser === false) {
-      if (currentOnlineUsers[i] === userId) {
+      if (currentOnlineUsers[i] === JSON.stringify(userId)) {
         newUser = false;
       } else {
         newUser = true;
