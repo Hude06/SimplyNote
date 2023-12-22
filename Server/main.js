@@ -20,7 +20,12 @@ app.post('/save', (req, res) => {
   const userId = req.body.userId;
   const userData = req.body.userData;
   const page = req.body.pageSending;
-  currentOnlineUsers.push(userId)
+  for (let i = 0; i < currentOnlineUsers.length; i++) {
+    if (currentOnlineUsers[i] === userId) {
+    } else {
+      currentOnlineUsers.push(userId)
+    }
+  }
   if (!userId || !userData) {
     return res.status(400).send('User ID and data are required');
   }
