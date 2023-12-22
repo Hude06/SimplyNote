@@ -9,7 +9,7 @@ const __filename = new URL(import.meta.url).pathname;
 const __dirname = path.dirname(__filename);
 const app = express();
 const port = 3500;
-let currentOnlineUsers = [];
+let currentOnlineUsers = ["NoName"];
 app.use(cors({ origin: [ "*","http://127.0.0.1:1430"] }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
