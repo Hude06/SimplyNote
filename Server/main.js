@@ -21,6 +21,7 @@ app.post('/save', (req, res) => {
   const userData = req.body.userData;
   const page = req.body.pageSending;
   for (let i = 0; i < currentOnlineUsers.length; i++) {
+    console.log(currentOnlineUsers[i])
     if (currentOnlineUsers[i] === userId) {
     } else {
       currentOnlineUsers.push(userId)
@@ -30,7 +31,6 @@ app.post('/save', (req, res) => {
     return res.status(400).send('User ID and data are required');
   }
 
-  console.log(req.body);
 
   const userDir = path.join(__dirname, 'users', userId);
 
@@ -47,7 +47,6 @@ app.post('/save', (req, res) => {
       return res.status(500).send('Error saving data');
     }
 
-    console.log('Data saved successfully!');
     res.status(200).send('Data saved successfully!');
   });
 });
@@ -71,11 +70,9 @@ app.get('/pages/:userId', (req, res) => {
   });
 
   // Send the list of pages with content as a response
-  console.log(pages)
   res.json({ pages });
 });
 app.get('/online', (req,res) => {
-  console.log("Trying to fetch")
   console.log(currentOnlineUsers)
   res.send("CurrentOnlineUsers " + currentOnlineUsers);
 })
