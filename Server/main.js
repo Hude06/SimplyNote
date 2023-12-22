@@ -29,6 +29,7 @@ app.post('/save', (req, res) => {
         newUser = true;
       }
     }
+    console.log(newUser)
     if (newUser) {
       currentOnlineUsers.push(userId)
       console.log("Pushing new user", userId)
