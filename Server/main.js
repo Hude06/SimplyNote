@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors'; // Import the cors middleware
 import fs from 'fs';
 import path from 'path';
-const fetch = require('node-fetch'); // Import node-fetch
+import fetch from 'node-fetch';
 
 const __filename = new URL(import.meta.url).pathname;
 const __dirname = path.dirname(__filename);
