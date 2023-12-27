@@ -10,6 +10,8 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = 3500;
 let newUser = false;
+const clientId = '3f9756c0e365406b866a';
+const clientSecret = '2657f125505c135d73786f452d7095edefd71ad4'
 let currentOnlineUsers = ["NoName"];
 app.use(cors({ origin: [ "*","http://127.0.0.1:1430"] }));
 app.use(bodyParser.json());
