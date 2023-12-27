@@ -17,6 +17,37 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
+app.get('/callback', (req, res) => {
+  const code = req.query.code;
+
+  // Exchange the code for an access token
+  const tokenEndpoint = 'https://github.com/login/oauth/access_token';
+  const params = new URLSearchParams({
+    client_id: clientId,
+    client_secret: clientSecret,
+    code: code,
+  });
+
+  fetch(tokenEndpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json',
+    },
+    body: params.toString(),
+  })
+    .then(response => response.json())
+    .then(data => {
+      const accessToken = data.access_token;
+
+      // Handle the access token (you might want to store it securely or use it for GitHub API requests)
+      res.send(`Access Token: ${accessToken}`);
+    })
+    .catch(error => {
+      console.error('Error exchanging code for access token:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
 app.post('/save', (req, res) => {
   const userId = req.body.userId;
   const userData = req.body.userData;

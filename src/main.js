@@ -16,6 +16,7 @@ var input = document.createElement('input');
 let logedIN = false;
 let connectedServer = false;
 let HYPERLINK = false;
+
 function PopUp(text) {
   document.getElementById("popup").style.visibility = "visible"
   document.getElementById("ok").addEventListener("click", () => {
