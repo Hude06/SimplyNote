@@ -32,29 +32,22 @@ if (code) {
   exchangeCodeForAccessToken(clientId,clientSecret,code)
     console.log(code)
 }
-function exchangeCodeForAccessToken(clientId, clientSecret, code) {
-  const tokenEndpoint = 'https://github.com/login/oauth/access_token';
+function exchangeCodeForAccessToken(code) {
+      // Assuming your server is running on localhost:3000
+      const serverUrl = 'http://apps.hude.earth:3500/callback';
 
-  const params = new URLSearchParams({
-    client_id: clientId,
-    client_secret: clientSecret,
-    code: code,
-  });
-
-  return fetch(tokenEndpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Accept': 'application/json',
-    },
-    body: params.toString(),
-  })
-    .then(response => response.json())
-    .then(data => data.access_token)
-    .catch(error => {
-      console.error('Error exchanging code for access token:', error);
-    });
-}
+      // Get the code from the URL or some other source
+      // Make a request to the server
+      fetch(`${serverUrl}/exchange?code=${code}`)
+        .then(response => response.text())
+        .then(data => {
+          console.log('Server response:', data);
+          // Handle the server response, which might be the access token
+        })
+        .catch(error => {
+          console.error('Error exchanging code for access token:', error);
+        });
+    }
 
 </script>
 

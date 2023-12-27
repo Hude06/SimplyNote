@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
-app.get('/callback', (req, res) => {
+app.get('/callback/exchange', (req, res) => {
   const code = req.query.code;
 
   // Exchange the code for an access token
