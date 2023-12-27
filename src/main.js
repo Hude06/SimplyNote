@@ -122,7 +122,11 @@ function keyboardInit() {
 }
 function ButtonInits() {
     addPage.addEventListener("click", function () {
+      if (logedIN) {
         addNewPage(allPages.length)
+      } else {
+        alert("Please Log In First")
+      }
     });
     loginButt.addEventListener("click", function() {
       console.log("Logging In")

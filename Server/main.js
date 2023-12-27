@@ -22,20 +22,6 @@ app.post('/save', (req, res) => {
   const userData = req.body.userData;
   const page = req.body.pageSending;
   for (let i = 0; i < currentOnlineUsers.length; i++) {
-    console.log(JSON.stringify(userId))
-    if (newUser === false) {
-      if (currentOnlineUsers[i] === JSON.stringify(userId)) {
-        newUser = false;
-      } else {
-        newUser = true;
-      }
-    }
-    if (newUser === true) {
-      currentOnlineUsers.push(userId)
-      console.log("Pushing new user", userId)
-
-      newUser = false;
-    }
   }
   if (!userId || !userData) {
     return res.status(400).send('User ID and data are required');
@@ -83,7 +69,6 @@ app.get('/pages/:userId', (req, res) => {
   res.json({ pages });
 });
 app.get('/online', (req,res) => {
-  res.send("CurrentOnlineUsers " + currentOnlineUsers);
 })
 
 

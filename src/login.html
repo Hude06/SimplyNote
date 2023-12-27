@@ -1,48 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Screen</title>
-    <style>
-        #login-body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Authentication Example</title>
+</head>
+<body>
 
-        #login-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+<h1>GitHub Authentication Example</h1>
+<button onclick="authenticateWithGitHub()">Authenticate with GitHub</button>
 
-        #loginForm {
-            display: flex;
-            flex-direction: column;
-        }
+<script>
+const clientId = '3f9756c0e365406b866a';
+const redirectUri = 'http://127.0.0.1:5501/src/login.html';
+const authorizeUrl = `https://github.com/login/oauth/authorize?client_id=`;
+const tokenUrl = 'https://github.com/login/oauth/access_token';
 
-        #username-label,
-        #password-label {
-            margin-bottom: 8px;
-        }
+function authenticateWithGitHub() {
+  // Step 1: Redirect the user to GitHub login page
+  console.log('Redirecting to GitHub for authentication...');
+  window.location.href = authorizeUrl+clientId;
+}
 
-        #username,
-        #password {
-            padding: 8px;
-            margin-bottom: 16px;
-        }
+// Check for the code parameter in the URL after GitHub redirects back
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
 
-        #login-button {
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-    </style>
+if (code) {
+  // Step 2: Exchange code for access token
+    console.log(code)
+}
+
+</script>
+
+</body>
+</html>
