@@ -43,16 +43,13 @@ app.get('/callback/exchange', (req, res) => {
     .then(data => {
       const accessToken = data.access_token;
 
-      // Use the access token to fetch user data from GitHub
-      const apiUrl = 'https://api.github.com/user';
-
-      return fetch(apiUrl, {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'User-Agent': 'SimplyNote',
-        },
-      });
+      // Handle the access token (you might want to store it securely or use it for GitHub API requests)
+      res.send(`Access Token: ${accessToken}`);
     })
+    .catch(error => {
+      console.error('Error exchanging code for access token:', error);
+      res.status(500).send('Internal Server Error');
+    });
 });
 app.post('/save', (req, res) => {
   const userId = req.body.userId;
