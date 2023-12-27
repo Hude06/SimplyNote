@@ -29,7 +29,7 @@ app.get('/callback/exchange', (req, res) => {
     client_id: clientId,
     client_secret: clientSecret,
     code: code,
-    redirect_uri: redirectUri,
+    redirect_uri: redirectUrl,
   });
 
   fetch(tokenEndpoint, {
