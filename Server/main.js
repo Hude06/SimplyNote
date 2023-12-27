@@ -29,8 +29,7 @@ app.get('/callback/exchange', (req, res) => {
     client_id: clientId,
     client_secret: clientSecret,
     code: code,
-  });
-
+  });  
   fetch(tokenEndpoint, {
     method: 'POST',
     headers: {
@@ -44,8 +43,20 @@ app.get('/callback/exchange', (req, res) => {
       const accessToken = data.access_token;
 
       // Handle the access token (you might want to store it securely or use it for GitHub API requests)
-      res.send(`Access Token: ${accessToken}`);
-    })
+      fetch('https://api.github.com/user', {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'User-Agent': 'SimplyNote', // GitHub requires a User-Agent header
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          const username = data.login;
+          console.log('GitHub Username:', username);
+        })
+        .catch(error => {
+          console.error('Error fetching user data:', error);
+        });    })
     .catch(error => {
       console.error('Error exchanging code for access token:', error);
       res.status(500).send('Internal Server Error');
