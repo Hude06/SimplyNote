@@ -53,6 +53,7 @@ app.get('/callback/exchange', (req, res) => {
         .then(data => {
           const username = data.login;
           console.log('GitHub Username:', username);
+          res.send(username + "")
         })
         .catch(error => {
           console.error('Error fetching user data:', error);
