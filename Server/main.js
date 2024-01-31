@@ -14,54 +14,11 @@ let newUser = false;
 const clientId = '3f9756c0e365406b866a';
 const clientSecret = '2657f125505c135d73786f452d7095edefd71ad4'
 let currentOnlineUsers = ["NoName"];
-app.use(cors({ origin: [ "*","http://127.0.0.1:1430"] }));
+app.use(cors({ origin: [ "*"] }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
-});
-app.get('/callback/exchange', (req, res) => {
-  const code = req.query.code;
-
-  // Exchange the code for an access token
-  const tokenEndpoint = 'https://github.com/login/oauth/access_token';
-  const params = new URLSearchParams({
-    client_id: clientId,
-    client_secret: clientSecret,
-    code: code,
-  });  
-  fetch(tokenEndpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Accept': 'application/json',
-    },
-    body: params.toString(),
-  })
-    .then(response => response.json())
-    .then(data => {
-      const accessToken = data.access_token;
-
-      // Handle the access token (you might want to store it securely or use it for GitHub API requests)
-      fetch('https://api.github.com/user', {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'User-Agent': 'SimplyNote', // GitHub requires a User-Agent header
-        },
-      })
-        .then(response => response.json())
-        .then(data => {
-          const username = data.login;
-          console.log('GitHub Username:', username);
-          res.send(username + "")
-        })
-        .catch(error => {
-          console.error('Error fetching user data:', error);
-        });    })
-    .catch(error => {
-      console.error('Error exchanging code for access token:', error);
-      res.status(500).send('Internal Server Error');
-    });
 });
 app.post('/save', (req, res) => {
   const userId = req.body.userId;
@@ -114,10 +71,6 @@ app.get('/pages/:userId', (req, res) => {
   // Send the list of pages with content as a response
   res.json({ pages });
 });
-app.get('/online', (req,res) => {
-})
-
-
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

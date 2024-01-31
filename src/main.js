@@ -15,69 +15,15 @@ let Uname = null
 var input = document.createElement('input');
 let logedIN = false;
 let connectedServer = false;
-let HYPERLINK = false;
-const authorizeUrl = `https://github.com/login/oauth/authorize?client_id=`;
-const tokenUrl = 'https://github.com/login/oauth/access_token';
-const clientId = '3f9756c0e365406b866a';
-
-const clientSecret = '2657f125505c135d73786f452d7095edefd71ad4'
-
-function authenticateWithGitHub() {
-  // Step 1: Redirect the user to GitHub login page
-  var iframe = document.createElement('iframe');
-
-  // Set attributes for the iframe
-  iframe.width = '560';
-  iframe.height = '315';
-  iframe.src = authorizeUrl+clientId;
-  iframe.frameborder = '0';
-  iframe.allowfullscreen = true;
-  
-  console.log(iframe)
-  // Append the iframe to the body or another element
-  document.getElementById("frame").appendChild(iframe);
-  document.getElementById("frame").style.visibility = "visible"
-}
-
-// Check for the code parameter in the URL after GitHub redirects back
-const urlParams = new URLSearchParams(window.location.search);
-const code = urlParams.get('code');
-
-if (code) {
-  // Step 2: Exchange code for access token
-  exchangeCodeForAccessToken(clientId,clientSecret,code)
-  console.log(code)
-}
-function exchangeCodeForAccessToken(code) {
-      // Assuming your server is running on localhost:3000
-      const serverUrl = 'http://apps.hude.earth:3500/callback';
-
-      // Get the code from the URL or some other source
-      // Make a request to the server
-      fetch(`${serverUrl}/exchange?code=${code}`)
-        .then(response => {
-          console.log(response)
-        })
-        .then(data => {
-          console.log('Server response:', data);
-          document.getElementById("frame").style.visibility = "hidden"
-
-          // Handle the server response, which might be the access token
-        })
-        .catch(error => {
-          console.error('Error exchanging code for access token:', error);
-        });
-    }
-
-function PopUp(text) {
-  document.getElementById("popup").style.visibility = "visible"
-  document.getElementById("ok").addEventListener("click", () => {
-    textBox.innerHTML += '<a href="'+document.getElementById("LINK").innerHTML+'"target="_blank">Visit W3Schools</a>'
-    document.getElementById("popup").style.visibility = "hidden"
-  })
-}
 function login() {
-  authenticateWithGitHub();
+  document.getElementById("login").style.visibility = "visible"
+  document.getElementById("signIN").addEventListener("click", function() {
+    console.log("Logging In")
+    Uname = document.getElementById("username").value
+    if (Uname !== null) {
+      fetchPages(Uname)
+    }
+  })
 }
 function fetchPages(userId) {
   fetch(`http://apps.hude.earth:3500/pages/${userId}`)
@@ -131,9 +77,6 @@ class Page {
     this.title = title
     this.text = text 
   }
-}
-if (Uname !== null) {
-  fetchPages(Uname)
 }
 function AddNewButton(name,array) {
   var newButton = document.createElement("Button");
@@ -209,24 +152,19 @@ function CheckPage() {
 }
 function loop() {
   console.log("Loop Is Running")
-  if (typing) {
-    if (HYPERLINK === false) {
-      console.log("GETTING RAN")
-      if (navKey.get("/")) {
-        HYPERLINK = true;
-        PopUp("LINK")
+  if (Uname !== null) {
+    if (typing) {
+      if (pageOn !== "") {
+        pageOn.text = textBox.innerHTML 
+        pageOn.title = title.innerHTML
+        document.getElementById(pageOn.id).innerHTML = pageOn.title
+        console.log("This is the page that we are on",allPages)
+        let string2 = JSON.stringify(allPages[pageOn.id])
+        console.log(Uname,string2,pageOn.id)
+        postData(Uname,string2,pageOn.id)    
       }
+      navKey.clear();
     }
-    if (pageOn !== "") {
-      pageOn.text = textBox.innerHTML 
-      pageOn.title = title.innerHTML
-      document.getElementById(pageOn.id).innerHTML = pageOn.title
-      console.log("This is the page that we are on",allPages)
-      let string2 = JSON.stringify(allPages[pageOn.id])
-      console.log(Uname,string2,pageOn.id)
-      postData(Uname,string2,pageOn.id)    
-    }
-    navKey.clear();
   }
   requestAnimationFrame(loop)
 }
