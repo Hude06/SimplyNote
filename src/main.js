@@ -16,6 +16,58 @@ var input = document.createElement('input');
 let logedIN = false;
 let connectedServer = false;
 let HYPERLINK = false;
+const authorizeUrl = `https://github.com/login/oauth/authorize?client_id=`;
+const tokenUrl = 'https://github.com/login/oauth/access_token';
+const clientId = '3f9756c0e365406b866a';
+
+const clientSecret = '2657f125505c135d73786f452d7095edefd71ad4'
+
+function authenticateWithGitHub() {
+  // Step 1: Redirect the user to GitHub login page
+  var iframe = document.createElement('iframe');
+
+  // Set attributes for the iframe
+  iframe.width = '560';
+  iframe.height = '315';
+  iframe.src = authorizeUrl+clientId;
+  iframe.frameborder = '0';
+  iframe.allowfullscreen = true;
+  
+  console.log(iframe)
+  // Append the iframe to the body or another element
+  document.getElementById("frame").appendChild(iframe);
+  document.getElementById("frame").style.visibility = "visible"
+}
+
+// Check for the code parameter in the URL after GitHub redirects back
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+
+if (code) {
+  // Step 2: Exchange code for access token
+  exchangeCodeForAccessToken(clientId,clientSecret,code)
+  console.log(code)
+}
+function exchangeCodeForAccessToken(code) {
+      // Assuming your server is running on localhost:3000
+      const serverUrl = 'http://apps.hude.earth:3500/callback';
+
+      // Get the code from the URL or some other source
+      // Make a request to the server
+      fetch(`${serverUrl}/exchange?code=${code}`)
+        .then(response => {
+          console.log(response)
+        })
+        .then(data => {
+          console.log('Server response:', data);
+          document.getElementById("frame").style.visibility = "hidden"
+
+          // Handle the server response, which might be the access token
+        })
+        .catch(error => {
+          console.error('Error exchanging code for access token:', error);
+        });
+    }
 
 function PopUp(text) {
   document.getElementById("popup").style.visibility = "visible"
@@ -25,13 +77,7 @@ function PopUp(text) {
   })
 }
 function login() {
-  document.getElementById("login").style.visibility = "visible"
-  document.getElementById("signIN").addEventListener("click", function () {
-    document.getElementById("login").style.visibility = "hidden"
-    Uname = document.getElementById("username").value
-    fetchPages(Uname)
-    logedIN = true;
-  });
+  authenticateWithGitHub();
 }
 function fetchPages(userId) {
   fetch(`http://apps.hude.earth:3500/pages/${userId}`)

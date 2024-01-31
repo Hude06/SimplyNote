@@ -236,6 +236,9 @@ font-family: 'Times New Roman', Times, serif;
   background-image: url('./assets/File.png');
   border: none;
 }
+#frame {
+  visibility: hidden;
+}
 #settings {
   position: absolute;
   z-index: 10;
