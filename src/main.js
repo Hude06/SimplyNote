@@ -20,8 +20,10 @@ function login() {
   document.getElementById("signIN").addEventListener("click", function() {
     console.log("Logging In")
     Uname = document.getElementById("username").value
+    document.getElementById("login").style.visibility = "hidden"
     if (Uname !== null) {
       console.log("Fetching Pages")
+      logedIN = true;
       fetchPages(Uname)
     }
   })
@@ -32,7 +34,7 @@ function fetchPages(userId) {
   .then(pages => {
     fetchedPages = pages
     console.log(fetchedPages.pages.length)
-    if (fetchedPages !== null && fetchedPages.pages.length !== 0) {
+    if (fetchedPages !== null && fetchedPages.length !== 0) {
       console.log("Not Empty")
         for (let i = 0; i < fetchedPages.pages.length; i++) {
           let retArray = JSON.parse(fetchedPages.pages[i].content)
@@ -45,8 +47,9 @@ function fetchPages(userId) {
           AddNewButton(i,allPages,allPages[i].title)
         }
         CheckPage();
-        connectedServer = true;
     }
+    connectedServer = true;
+
   })
   setTimeout(() => {
     if (connectedServer === false) {
