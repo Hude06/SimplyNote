@@ -17,9 +17,9 @@ var allowCrossDomain = function(req,res,next) {
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();  
 }
-app.use(allowCrossDomain);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(allowCrossDomain);
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -62,7 +62,7 @@ app.get('/pages/:userId', (req, res) => {
     fs.mkdirSync(userDir);
     return res.send('User not found, Creating User');
   }
-
+  console.log("Getting Pages")
   const pages = [];
 
   fs.readdirSync(userDir).forEach(file => {

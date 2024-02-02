@@ -21,6 +21,7 @@ function login() {
     console.log("Logging In")
     Uname = document.getElementById("username").value
     if (Uname !== null) {
+      console.log("Fetching Pages")
       fetchPages(Uname)
     }
   })
