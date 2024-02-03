@@ -11,15 +11,16 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = 3500;
 let currentOnlineUsers = ["NoName"];
-var allowCrossDomain = function(req,res,next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();  
-}
+const corsOptions = {
+  origin: '*', // You can replace '*' with your specific domain
+  methods: 'GET,PUT,POST,DELETE',
+  allowedHeaders: 'Content-Type',
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(allowCrossDomain);
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
