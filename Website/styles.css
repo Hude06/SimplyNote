@@ -7,14 +7,13 @@ body {
     --redwood: #B0594Fff;
     --tekhelet: #4B2F8Cff;
     --coral: #F8874Dff;
-    --bittersweet: #F36858ff;
+    --bittersweet: rgb(25, 24, 24);
     --razzmatazz: #E01A67ff;
     --tekhelet-2: #5D1B7Cff;
     --black: #000000ff;
     --black-2: #000000ff;
 }
 #logo {
-    
     width: 70px;
     height: 60px;
 }
@@ -22,6 +21,24 @@ header {
     padding: 10px;
     height: 60px; /* Adjust the height as needed */
     background-color: var(--coral);
+}
+#login {
+    text-decoration: none;
+    color: white;
+    background-color: #4B2F8Cff;
+    transition: background-color 0.5s ease; /* property duration timing-function */
+    width: 100px;
+    height: 50px;
+    text-shadow: none;
+    border: none;
+    border-radius: 5%;
+    position: absolute;
+    z-index: 2;
+    left: 94%;
+    top: 1.6%;
+}
+#login:hover {
+    background-color: #5D1B7Cff
 }
 #HeaderText {
     margin-top: -53px;
@@ -32,6 +49,7 @@ nav {
     display: flex;
     justify-content: center;
     padding: 10px;
+    margin-top: -56px;
     background-color: var(--coral);
 }
 
