@@ -29,7 +29,7 @@ function login() {
   })
 }
 function fetchPages(userId) {
-  fetch(`https://apps.hude.earth:3500/pages/${userId}`)
+  fetch(`http://apps.hude.earth:3500/pages/${userId}`)
   .then(response => response.json())
   .then(pages => {
     fetchedPages = pages
@@ -59,7 +59,7 @@ function fetchPages(userId) {
 }
 function postData(userId,userData,pageSending) {
   console.log(userData,pageSending)
-  fetch('https://apps.hude.earth:3500/save', {
+  fetch('http://apps.hude.earth:3500/save', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
