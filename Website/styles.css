@@ -31,7 +31,6 @@ nav {
     display: flex;
     justify-content: center;
     padding: 10px;
-    border-bottom: 10px solid;
     background-color: var(--coral);
 }
 
