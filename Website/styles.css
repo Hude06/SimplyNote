@@ -1,9 +1,9 @@
-/* styles.css */
+/* styles.css */    
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #333;
+    background-color: #F36858ff;
     --redwood: #B0594Fff;
     --tekhelet: #4B2F8Cff;
     --coral: #F8874Dff;
@@ -19,7 +19,8 @@ body {
 }
 header {
     padding: 10px;
-    height: 20px; /* Adjust the height as needed */
+    height: 60px; /* Adjust the height as needed */
+    background-color: var(--coral);
 }
 #HeaderText {
     margin-top: -53px;
@@ -29,7 +30,9 @@ header {
 nav {
     display: flex;
     justify-content: center;
-    padding: -10px;
+    padding: 10px;
+    border-bottom: 10px solid;
+    background-color: var(--coral);
 }
 
 nav a {
