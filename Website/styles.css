@@ -1,0 +1,42 @@
+/* styles.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+}
+
+header {
+    padding: 10px;
+    height: 20px; /* Adjust the height as needed */
+}
+#HeaderText {
+    margin-top: 10px;
+    color: white;
+}
+nav {
+    display: flex;
+    justify-content: center;
+    padding: -10px;
+}
+
+nav a {
+    color: #fff;
+    margin: 0px 30px;
+    font-weight: bold;
+    text-decoration: none;
+
+}
+nav a:hover {
+    text-decoration: underline;
+    /* box-shadow: 0px 10px #888888; */
+}
+main {
+    text-align: center;
+    padding: 50px;
+}
+
+h1 {
+    color: white;
+}
