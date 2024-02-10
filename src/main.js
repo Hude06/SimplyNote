@@ -6,7 +6,7 @@ let textBox = document.getElementById("textBox")
 let pageList = document.getElementById("page-list")
 let title = document.getElementById("title")
 let loginButt = document.getElementById("loginButt")
-let SettingsButton = document.getElementById("settings")
+let slideButton = document.getElementById("hideSide")
 let IDOn = 0;
 let allPages = []
 let pageOn = ""
@@ -126,11 +126,11 @@ function ButtonInits() {
       console.log("Logging In")
       login();
     })
-    SettingsButton.addEventListener("click", function() {
-      document.getElementById("settingsPage").style.visibility = "visible"
-    })
+    slideButton.addEventListener("click", function() {
+      document.getElementById("sidebar").style.visibility = "hidden"
+      document.getElementById("main-content").style.left = "2vh"
+      })
     document.getElementById("inputfile").addEventListener('change', function () {
-
         let fr = new FileReader();
         fr.onload = function () {
             console.log(fr.result);

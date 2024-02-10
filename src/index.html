@@ -28,25 +28,23 @@
         <div id = "LINK" contenteditable = "true">https://</div>
         <button id = "ok">OK</button>
     </div>
-    <input type="file" name="inputfile" id="inputfile">
-        <div class="app-container" id = "app-container">
-        <button id = "loginButt">login</button>
-        <div id = "frame"></div>
-        <button id = "settings"></button>
-        <div id = "settingsPage">
-            <div></div>
+    <div class="sidebar" id = "sidebar">
+        <input type="file" name="inputfile" id="inputfile">
+            <div class="app-container" id = "app-container">
+                <button id = "loginButt">login</button>
+                <div id = "frame"></div>
+                <h3 id = "username">UserName</h3>
+                <button id = "hideSide"><<</button>
+                <button id="add-page">+ Add A Page</button>
+                <ul id="page-list">
+                    <!-- Pages will be listed here -->
+                </ul>  
         </div>
-        <div class="sidebar">
-            <button id="add-page">+ Add A Page</button>
-            <ul id="page-list">
-                <!-- Pages will be listed here -->
-            </ul>  
-            </div>
-        <div class="main-content">
-            <div class="title"contenteditable="true" id = "title">Title of Your Page</div>
-            <div id = "textBox" class="note" contenteditable="true">
-                Start typing your note here...
-            </div>
+    </div>
+    <div class="main-content" id = "main-content">
+        <div class="title"contenteditable="true" id = "title">Title of Your Page</div>
+        <div id = "textBox" class="note" contenteditable="true">
+            Start typing your note here...
         </div>
     </div>
     <script type = "module"src="main.js"></script>
