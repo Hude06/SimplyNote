@@ -3,7 +3,7 @@
   z-index: 200;
   width: 70px;
   margin-left: 10px;
-  margin-top: 12px;
+  margin-top: 0.1vh;
   box-shadow: none;
   border-radius: 0%;
   background-color: transparent;
@@ -12,7 +12,7 @@
   position: absolute;
   z-index: 1;
   padding: 0;
-  margin-top: 18px;
+  margin-top: 1vh;
   margin-left: 125px;
   width: 100px;
   height: 30px;
@@ -190,7 +190,7 @@ min-height: 100vh;
 }
 
 .sidebar {
-width: 300px;
+width: 22vh;
 background-color: #333;
 color: #fff;
 padding: 20px;
@@ -227,14 +227,12 @@ font-family: 'Times New Roman', Times, serif;
   outline: none;
 }
 #add-page {
-  margin-left: 290px;
-  background-size: 55%; /* This property sets the size of the background image */
-  height: 30px;
+  margin-left: -7px;
+  margin-top: 40px;
+  width: 200px;
+  height: 50px;
+  background-size: 100%; /* This property sets the size of the background image */
   background-repeat: no-repeat;
-  background-color: transparent;
-  box-shadow: none;
-  background-image: url('./assets/File.png');
-  border: none;
 }
 #frame {
   visibility: hidden;
@@ -300,4 +298,10 @@ font-family: 'Times New Roman', Times, serif;
   visibility: hidden;
   position: absolute;
   z-index: 200;
+}
+
+label {
+  background-color: white;
+  border-radius: 10%;
+  outline: none;
 }
