@@ -12,7 +12,7 @@ const app = express();
 const port = 3500;
 let currentOnlineUsers = ["NoName"];
 const corsOptions = {
-  origin: 'https://apps.hude.earth/SimplyNote/src/index.html', // You can replace '*' with your specific domain
+  origin: 'http://apps.hude.earth:3500', // You can replace '*' with your specific domain
   methods: 'GET,PUT,POST,DELETE',
   allowedHeaders: 'Content-Type',
 };
