@@ -15,6 +15,7 @@ let Uname = null
 var input = document.createElement('input');
 let logedIN = false;
 let connectedServer = false;
+let SideBarOPEN = true;
 function login() {
   document.getElementById("login").style.visibility = "visible"
   document.getElementById("signIN").addEventListener("click", function() {
@@ -127,9 +128,8 @@ function ButtonInits() {
       login();
     })
     slideButton.addEventListener("click", function() {
-      document.getElementById("sidebar").style.visibility = "hidden"
-      document.getElementById("main-content").style.left = "2vh"
-      })
+      SideBarOPEN = !SideBarOPEN;
+    })
     document.getElementById("inputfile").addEventListener('change', function () {
         let fr = new FileReader();
         fr.onload = function () {
@@ -156,6 +156,20 @@ function CheckPage() {
 }
 function loop() {
   console.log("Loop Is Running")
+  if (SideBarOPEN == false) {
+    document.getElementById("sidebar").style.visibility = "hidden"
+    document.getElementById("main-content").style.left = "9vh"
+    document.getElementById("hideSide").style.marginLeft = "0vh"
+    document.getElementById("hideSide").innerHTML = ">>"
+  }
+  if (SideBarOPEN) {
+    document.getElementById("sidebar").style.visibility = "visible"
+    document.getElementById("main-content").style.left = "28vh"
+    document.getElementById("hideSide").style.marginLeft = "19vh"
+    document.getElementById("hideSide").innerHTML = "<<"
+
+
+  }
   if (Uname !== null) {
     if (typing) {
       if (pageOn !== "") {

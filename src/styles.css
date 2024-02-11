@@ -1,8 +1,8 @@
 #inputfile {
   position: absolute;
-  z-index: 200;
+  z-index: 300;
   width: 70px;
-  margin-left: 0px;
+  margin-left: -3vh;
   margin-top: 9vh;
   box-shadow: none;
   border-radius: 0%;
@@ -13,7 +13,7 @@
   z-index: 1;
   padding: 0;
   margin-top: 10vh;
-  margin-left: 110px;
+  margin-left: 11vh;
   width: 100px;
   height: 30px;
 }
@@ -224,29 +224,12 @@ margin-bottom: 20px;
   overflow: hidden;
   user-select: none;
   outline: none;
+  font-size: 1.1vh;
+  word-wrap: break-word;
 }
-#add-page {
-  margin-left: -7px;
-  margin-top: 100px;
-  width: 200px;
-  height: 50px;
-  background-size: 100%; /* This property sets the size of the background image */
-  background-repeat: no-repeat;
-}
-#frame {
-  visibility: hidden;
-}
-#folder-list button {
-  text-align: center;
-  display: flex;
-  width: 300px;
-  background-color: transparent;
-  box-shadow: none;
-  position: relative;
-  margin-left: -60px;
-}
-#folder-list {
-  text-align: center;
+#title {
+  font-size: 3vh;
+
 }
 #loginForm {
   display: flex;
@@ -255,7 +238,6 @@ margin-bottom: 20px;
   align-items: center;
   width: 100vw;
   height: 100vh;
-
 }
 #login {
   text-align: center;
@@ -263,27 +245,22 @@ margin-bottom: 20px;
   position: absolute;
   z-index: 200;
 }
-#LINK {
-  border: 2px solid black;
-}
-#popup {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  z-index: 500;
-  visibility: hidden;
-}
 
 #hideSide {
   position: absolute;
   margin-left: 15vh;
-  margin-top: 0%;
+  margin-top: 1vh;
 }
-#username {
+#add-page {
   position: absolute;
-  margin-top: 2vh;
+  margin-top: 15vh;
+  width: 20vh;
+  height: 5vh;
+  padding-left: 0%;
+  margin-left: 1vh;
+  text-align: center;
+}
+#GamerTag {
+  text-align: center;
+  margin-top: 0px;
 }
