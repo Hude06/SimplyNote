@@ -12,9 +12,7 @@ const app = express();
 const port = 3500;
 let currentOnlineUsers = ["NoName"];
 const corsOptions = {
-  origin: 'http://apps.hude.earth:3500', // You can replace '*' with your specific domain
-  methods: 'GET,PUT,POST,DELETE',
-  allowedHeaders: 'Content-Type',
+  origin: '*', // You can replace '*' with your specific domain
 };
 
 app.use(cors(corsOptions));
